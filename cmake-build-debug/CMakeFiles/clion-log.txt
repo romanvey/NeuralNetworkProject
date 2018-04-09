@@ -1,0 +1,13 @@
+/home/zabulskyy/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/181.4203.549/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/zabulskyy/Projects/Parallel-NN-C++
+CMake Error at CMakeLists.txt:11 (add_executable):
+  The target name "test" is reserved or not valid for certain CMake features,
+  such as generator expressions, and may result in undefined behavior.
+
+
+CMake Error at CMakeLists.txt:12 (target_link_libraries):
+  Cannot specify link libraries for target "test" which is not built by this
+  project.
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/zabulskyy/Projects/Parallel-NN-C++/cmake-build-debug/CMakeFiles/CMakeOutput.log".
