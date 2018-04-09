@@ -4,6 +4,8 @@
 #include <Eigen/Dense>
 #include <iostream>
 
+using Eigen::MatrixXd;
+
 class Layer
 {
     public:
