@@ -3,4 +3,6 @@
 int main()
 {
     NeuralNetwork nn;
+    Activation a;
+    
 }

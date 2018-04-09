@@ -4,13 +4,13 @@
 #include <Eigen/Dense>
 #include <iostream>
 
-using Eigen::MatrixXd;
+using Eigen::Matrix2d;
 
 class Layer
 {
     public:
-        virtual MatrixXd forward(MatrixXd X, double lr) = 0;
-        virtual MatrixXd backward(MatrixXd chain_error) = 0;
+        virtual Matrix2d forward(Matrix2d X, double lr) = 0;
+        virtual Matrix2d backward(Matrix2d chain_error) = 0;
 };
 
 
