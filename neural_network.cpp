@@ -1,3 +1,5 @@
+#include "neural_network.h"
+
 #include <iostream>
 #include <Eigen/Dense>
 using Eigen::MatrixXd;

@@ -1,0 +1,5 @@
+#ifndef NN_ACTIVATION_H
+#define NN_ACTIVATION_H
+
+
+#endif //NN_ACTIVATION_H
