@@ -1,16 +1,15 @@
 #ifndef NN_LAYER_H
 #define NN_LAYER_H
 
-// class A2DD
-// {
-//   int gx;
-//   int gy;
+#include <Eigen/Dense>
+#include <iostream>
 
-// public:
-//   A2DD(int x,int y);
-//   int getSum();
-
-// };
+class Layer
+{
+    public:
+        virtual MatrixXd forward(MatrixXd X, double lr) = 0;
+        virtual MatrixXd backward(MatrixXd chain_error) = 0;
+};
 
 
 #endif //NN_LAYER_H

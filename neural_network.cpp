@@ -1,8 +1,8 @@
 #include "neural_network.h"
-
-#include <iostream>
-#include <Eigen/Dense>
 using Eigen::MatrixXd;
+
+
+
 int main()
 {
   MatrixXd m(2,2);
