@@ -2,15 +2,19 @@
 #define NN_ACTIVATION_H
 
 #include <Eigen/Dense>
-using Eigen::Matrix2d;
+
+using Eigen::MatrixXd;
 
 class Activation {
-        private:
-        Matrix2d _sigmoid(Matrix2d X);
-        Matrix2d _derivative_sigmoid(Matrix2d X);
-        public:
-        Matrix2d backward(Matrix2d chain_error);
-        Matrix2d forward(Matrix2d X, double lr);
+public:
+
+    MatrixXd _sigmoid(MatrixXd X); // TODO temporary public
+
+    MatrixXd _derivative_sigmoid(MatrixXd X); // TODO temporary public
+
+    MatrixXd backward(MatrixXd chain_error);
+
+    MatrixXd forward(MatrixXd X, double lr);
 };
 
 #endif //NN_ACTIVATION_H
