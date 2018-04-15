@@ -1,19 +1,16 @@
 #include "activation.h"
 
 using Eigen::Matrix2d;
-
+double _sigmoid_function(double x) { return 1 / (1 + exp(-x)); }
 Matrix2d Activation::_sigmoid(Matrix2d X) {
-    double sigmoid(double x) { return 1 / (1 + exp(-x)); }
-    Matrix2d newX = X.unaryExpr(&sigmoid);
+    Matrix2d newX = X.unaryExpr(&_sigmoid_function);
     return newX;
 };
 
+double _derivative_sigmoid_function(double x) { return x * (1 - x); }
 Matrix2d Activation::_derivative_sigmoid(Matrix2d X) {
-    double derivative_sigmoid(double x) { return x * (1 - x); }
-    double sigmoid(double x) { return 1 / (1 + exp(-x)); }
-
-    Matrix2d newX = X.unaryExpr(&sigmoid);
-    newX = newX.unaryExpr(&derivative_sigmoid);
+    Matrix2d newX = X.unaryExpr(&_derivative_sigmoid_function);
+    newX = newX.unaryExpr(&_derivative_sigmoid_function);
     return newX;
 };
 

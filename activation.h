@@ -2,6 +2,7 @@
 #define NN_ACTIVATION_H
 
 #include <Eigen/Dense>
+using Eigen::Matrix2d;
 
 class Activation {
         private:
