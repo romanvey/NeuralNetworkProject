@@ -1,3 +1,0 @@
-/home/zabulskyy/Projects/Parallel-NN-C++/CMakeFiles/rebuild_cache.dir
-/home/zabulskyy/Projects/Parallel-NN-C++/CMakeFiles/edit_cache.dir
-/home/zabulskyy/Projects/Parallel-NN-C++/CMakeFiles/test_test.dir
