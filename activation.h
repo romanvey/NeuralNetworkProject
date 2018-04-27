@@ -5,7 +5,7 @@
 
 using Eigen::MatrixXd;
 
-class Activation {
+class ActivationLayer {
 public:
 
     MatrixXd _sigmoid(MatrixXd X); // TODO temporary public
