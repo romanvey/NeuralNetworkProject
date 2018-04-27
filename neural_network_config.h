@@ -1,11 +1,11 @@
 #ifndef NN_NN_CONFIG_H
-#define NN_NN__CONFIGH
+#define NN_NN_CONFIG_H
 
 
 class NeuralNetworkConfig
 {
     public:
-        int lr = 0.1;
+        double lr = 0.1;
 };
 
 

@@ -15,4 +15,8 @@ int main() {
     std::cout << test_m << std::endl;
 
 	// * DenseLayer Tests
+	NeuralNetworkConfig conf;
+	DenseLayer dl(4, 5, conf);
+	std::cout<<dl.w<<std::endl;
+	std::cout<<dl.config.lr<<std::endl;
 }

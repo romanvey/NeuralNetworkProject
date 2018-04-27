@@ -3,16 +3,15 @@
 
 #include<random>
 #include <Eigen/Dense>
+#include "neural_network_config.h"
 
 using Eigen::MatrixXd;
 
 class DenseLayer {
-private:{
+public:
 	NeuralNetworkConfig config;
 	int input_nodes, output_nodes;
 	MatrixXd w, b;
-}
-public:
 	DenseLayer(int input_nodes, int output_nodes, NeuralNetworkConfig config);
     MatrixXd backward(MatrixXd chain_error);
     MatrixXd forward(MatrixXd X);

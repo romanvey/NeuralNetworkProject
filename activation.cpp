@@ -1,5 +1,7 @@
 #include "activation.h"
 
+// ! Change structure according to config file and create constructor
+
 using Eigen::MatrixXd;
 
 double _sigmoid_function(double x) { return 1 / (1 + exp(-x)); }
