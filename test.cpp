@@ -38,8 +38,19 @@ int main()
 	nn.add(new DenseLayer(6, 1));
 	nn.add(new ActivationLayer("sigmoid"));	
 
+
 	MatrixXd X(4, 2);
 	X << 1, 1, 1, 0, 0, 1, 0, 0;
-	std::cout<<X<<std::endl;
+	
+	MatrixXd y(4, 1);
+	y << 0, 1, 1, 0;
+
+	
+	std::cout<<"fit"<<std::endl;
+	nn.fit(X, y);
+	std::cout<<"predict"<<std::endl;
+	MatrixXd predictions = nn.predict(X);
+	std::cout<<"result"<<std::endl;
+	std::cout<<predictions<<std::endl;
 
 }

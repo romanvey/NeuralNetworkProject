@@ -47,14 +47,14 @@ ActivationLayer::ActivationLayer(std::string activation_name){
 ActivationLayer::ActivationLayer(){}
 
 
-MatrixXd ActivationLayer::forward(MatrixXd X, NeuralNetworkConfig config) {
+MatrixXd ActivationLayer::forward(MatrixXd X, NeuralNetworkConfig config){
 	this->config = config;
 	value = _activ_function(X);
 	return value;
 
 };
 
-MatrixXd ActivationLayer::backward(MatrixXd chain_error) {
+MatrixXd ActivationLayer::backward(MatrixXd chain_error){
 	MatrixXd t = _deriv_function(chain_error);
 	MatrixXd one_matrix = MatrixXd::Constant(t.rows(), t.cols(), 1);
 	return t * (one_matrix - t);

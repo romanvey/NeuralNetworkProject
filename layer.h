@@ -5,13 +5,13 @@
 #include <iostream>
 #include "neural_network_config.h"
 
-using Eigen::Matrix2d;
+using Eigen::MatrixXd;
 
 class Layer
 {
     public:
-        virtual Matrix2d forward(Matrix2d X, NeuralNetworkConfig config) = 0;
-        virtual Matrix2d backward(Matrix2d chain_error) = 0;
+        virtual MatrixXd forward(MatrixXd X, NeuralNetworkConfig config) = 0;
+        virtual MatrixXd backward(MatrixXd chain_error) = 0;
 };
 
 
