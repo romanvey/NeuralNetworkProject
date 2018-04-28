@@ -4,14 +4,19 @@
 #include "layer.h"
 #include <iostream>
 #include <vector>
+#include "neural_network_config.h"
 
-
+using Eigen::MatrixXd;
 class NeuralNetwork {
-private:
-	std::vector<Layer*> layers;
-
 public:
+	NeuralNetwork(NeuralNetworkConfig config);
+	NeuralNetwork();
 	void add(Layer* layer);
+	MatrixXd fit(MatrixXd X, MatrixXd y);
+	MatrixXd predict(MatrixXd X);
+
+	std::vector<Layer*> layers;
+	NeuralNetworkConfig config;
 };
 
 #endif //NN_NN_H
