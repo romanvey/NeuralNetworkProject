@@ -19,8 +19,8 @@ public:
 	MatrixXd _activ_function(MatrixXd X);
 	MatrixXd _deriv_function(MatrixXd X);
 
-    MatrixXd forward(MatrixXd X, NeuralNetworkConfig config);
-    MatrixXd backward(MatrixXd chain_error);
+    MatrixXd forward(MatrixXd X, NeuralNetworkConfig config) override;
+    MatrixXd backward(MatrixXd chain_error) override;
 
 	std::string activation_name = "sigmoid";
 	NeuralNetworkConfig config;

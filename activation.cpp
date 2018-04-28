@@ -38,25 +38,36 @@ MatrixXd ActivationLayer::_deriv_function(MatrixXd X){
 }
 
 
-
-
-
 ActivationLayer::ActivationLayer(std::string activation_name){
 	this->activation_name = activation_name;
 }
 ActivationLayer::ActivationLayer(){}
 
 
+
+
+
 MatrixXd ActivationLayer::forward(MatrixXd X, NeuralNetworkConfig config){
+	if(config.verbose){
+		std::cout<<"Activation forward started"<<std::endl;
+	}
 	this->config = config;
 	value = _activ_function(X);
+	if(config.verbose){
+		std::cout<<"Activation forward ended"<<std::endl;
+	}
 	return value;
 
 };
 
 MatrixXd ActivationLayer::backward(MatrixXd chain_error){
-	MatrixXd t = _deriv_function(chain_error);
-	MatrixXd one_matrix = MatrixXd::Constant(t.rows(), t.cols(), 1);
-	return t * (one_matrix - t);
+	if(config.verbose){
+		std::cout<<"Activation backward started"<<std::endl;
+	}
+	MatrixXd t = _activ_function(chain_error);
+	if(config.verbose){
+		std::cout<<"Activation backward ended"<<std::endl;
+	}
+	return _deriv_function(t);
 };
 

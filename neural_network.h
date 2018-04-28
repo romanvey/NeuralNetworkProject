@@ -12,7 +12,7 @@ public:
 	NeuralNetwork(NeuralNetworkConfig config);
 	NeuralNetwork();
 	void add(Layer* layer);
-	MatrixXd fit(MatrixXd X, MatrixXd y);
+	void fit(MatrixXd X, MatrixXd y);
 	MatrixXd predict(MatrixXd X);
 
 	std::vector<Layer*> layers;
