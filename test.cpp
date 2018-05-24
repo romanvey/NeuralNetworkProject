@@ -56,8 +56,9 @@ int main()
 
 	// NeuralNetwork Tests
 	NeuralNetworkConfig conf;
-	conf.epochs = 5000;
+	conf.epochs = 100;
 	conf.lr = 0.01;
+	conf.verbose = false;
 	NeuralNetwork nn(conf);
 	nn.add(new DenseLayer(2, 6));
 	nn.add(new ActivationLayer("sigmoid"));

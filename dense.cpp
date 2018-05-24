@@ -8,7 +8,7 @@ DenseLayer::DenseLayer(int input_nodes, int output_nodes){
 }
 
 MatrixXd DenseLayer::forward(MatrixXd X, NeuralNetworkConfig config){
-	// * Parallelized
+	// ! Parallelized
 	if(config.verbose){
 		std::cout<<"Dense forward started"<<std::endl;
 	}
@@ -26,13 +26,11 @@ MatrixXd DenseLayer::forward(MatrixXd X, NeuralNetworkConfig config){
 
 
 MatrixXd DenseLayer::backward(MatrixXd chain_error){
-	// * Parallelized
+	// ! Parallelized
 	if(config.verbose){
 		std::cout<<"Dense backward started"<<std::endl;
 	}
 	MatrixXd result = chain_error*w.transpose();
-	
-	std::cout<<value.transpose() * chain_error<<std::endl; // ! remove it
 
 	MatrixXd changed_w = w + ((value.transpose() * chain_error) * config.lr);
 	MatrixXd changed_b = b + (chain_error.colwise().sum() * config.lr);
