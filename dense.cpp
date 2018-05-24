@@ -4,8 +4,8 @@ DenseLayer::DenseLayer(int input_nodes, int output_nodes){
 	this->input_nodes = input_nodes;
 	this->output_nodes = output_nodes;
 	w = MatrixXd::Random(input_nodes ,output_nodes);
-//	w = MatrixXd::Ones(input_nodes ,output_nodes);
 	b = MatrixXd::Random(1 ,output_nodes);
+//	w = MatrixXd::Ones(input_nodes ,output_nodes);
 //	b = MatrixXd::Zero(1 ,output_nodes);
 
 }
@@ -13,7 +13,7 @@ DenseLayer::DenseLayer(int input_nodes, int output_nodes){
 MatrixXd DenseLayer::forward(MatrixXd X, NeuralNetworkConfig config){
 	// ! Parallelized
 	if(config.verbose){
-//		std::cout<<"Dense forward started"<<std::endl;
+		std::cout<<"Dense forward started"<<std::endl;
 	}
 	this->config = config;
 	value = X;
@@ -27,7 +27,7 @@ MatrixXd DenseLayer::forward(MatrixXd X, NeuralNetworkConfig config){
 //    std::cout << result << std::endl;
 
 	if(config.verbose){
-//		std::cout<<"Dense forward ended"<<std::endl;
+		std::cout<<"Dense forward ended"<<std::endl;
 	}
 
 //    std::cout << "value is: \n" << std::endl;
@@ -37,22 +37,12 @@ MatrixXd DenseLayer::forward(MatrixXd X, NeuralNetworkConfig config){
 
 
 MatrixXd DenseLayer::backward(MatrixXd chain_error){
-<<<<<<< HEAD
-	// ! Parallelized
-=======
 
-
-	// * Parallelized
->>>>>>> 3118add4d5c400cfa0d423d0c6792d8213790647
 	if(config.verbose){
-//		std::cout<<"Dense backward started"<<std::endl;
+		std::cout<<"Dense backward started"<<std::endl;
 	}
 	MatrixXd result = chain_error*w.transpose();
-<<<<<<< HEAD
-=======
-	
-//	std::cout<<value.transpose() * chain_error<<std::endl; // ! remove it
->>>>>>> 3118add4d5c400cfa0d423d0c6792d8213790647
+
 
 	MatrixXd changed_w = w + ((value.transpose() * chain_error) * config.lr);
 	MatrixXd changed_b = b + (chain_error.colwise().sum() * config.lr);
@@ -60,7 +50,7 @@ MatrixXd DenseLayer::backward(MatrixXd chain_error){
 	w = config.inertia * changed_w + (1 - config.inertia) * w;
 	b = config.inertia * changed_b + (1 - config.inertia) * b;
 	if(config.verbose){
-//		std::cout<<"Dense backward ended"<<std::endl;
+/		std::cout<<"Dense backward ended"<<std::endl;
 	}
 
 //    std::cout << "cost is : \n";

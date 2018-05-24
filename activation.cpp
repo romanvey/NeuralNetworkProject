@@ -12,7 +12,6 @@ MatrixXd ActivationLayer::_sigmoid(MatrixXd X) {
 
 MatrixXd ActivationLayer::_derivative_sigmoid(MatrixXd X) {
     MatrixXd newX = X.unaryExpr(&_derivative_sigmoid_function);
-//    newX = newX.unaryExpr(&_derivative_sigmoid_function);
     return newX;
 };
 
