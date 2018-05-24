@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/NeuralNetwork.dir/neural_network.cpp.o CMakeFiles/NeuralNetwork.dir/dense.cpp.o CMakeFiles/NeuralNetwork.dir/layer.cpp.o CMakeFiles/NeuralNetwork.dir/activation.cpp.o  -o NeuralNetwork 
