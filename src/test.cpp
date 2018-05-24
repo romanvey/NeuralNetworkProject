@@ -50,21 +50,26 @@ int main()
 	NeuralNetwork nn(conf);
 	nn.add(new DenseLayer(2, 5));
 	nn.add(new ActivationLayer("sigmoid"));
-	nn.add(new DenseLayer(5, 3));
+	nn.add(new DenseLayer(5, 12));
 	nn.add(new ActivationLayer("sigmoid"));
-	nn.add(new DenseLayer(3, 1));
+	nn.add(new DenseLayer(12, 5));
 	nn.add(new ActivationLayer("sigmoid"));
 
 
 	MatrixXd X(4, 2);
 	X << 1, 1, 1, 0, 0, 1, 0, 0;
 	
-	MatrixXd y(4, 1);
-	y << 0, 1, 1, 0;
+	MatrixXd y(4, 5);
+	y << 0, 1, 1, 0,
+            1, 1, 1, 0,
+            0, 0, 0, 1,
+            1, 0, 0, 0,
+            1, 0, 0, 1;
 
 
 	nn.fit(X, y);
 	MatrixXd predictions = nn.predict(X);
-	std::cout<<predictions<<std::endl;
+	std::cout<<std::endl<<predictions<<std::endl<<std::endl;
+	std::cout<<y<<std::endl;
 
 }
