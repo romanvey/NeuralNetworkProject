@@ -1,9 +1,4 @@
-#include <Eigen/Dense>
-#include <vector>
-#include <fstream>
-#include <iostream>
-
-using namespace Eigen;
+#include "csv.h"
 
 template<typename M>
 M load_csv (const std::string & path) {
@@ -23,9 +18,9 @@ M load_csv (const std::string & path) {
     return Map<const Matrix<typename M::Scalar, M::RowsAtCompileTime, M::ColsAtCompileTime, RowMajor>>(values.data(), rows, values.size()/rows);
 }
 
-/*
+
 int main(){
-	MatrixXd A = load_csv<MatrixXd>("../resources/iris.csv");
-	std::cout<<A<<std::endl;
+	std::cout<<"Utils worked!"<<std::endl;
+	//MatrixXd A = load_csv<MatrixXd>("../resources/iris.csv");
+	//std::cout<<A<<std::endl;
 }
-*/
