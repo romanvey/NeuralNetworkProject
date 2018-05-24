@@ -10,6 +10,8 @@ file(GLOB src_files
 
 # Example of usage of our library
 add_executable(test_nn ${src_files})
+#add_executable(read_csv "src/csv.cpp")
 # add_executable (test_nn test.h neural_network.h neural_network_config.h dense.h layer.h activation.h test.cpp neural_network.cpp dense.cpp activation.cpp)
 
 target_link_libraries (test_nn Eigen3::Eigen)
+#target_link_libraries (read_csv Eigen3::Eigen)
