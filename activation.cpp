@@ -3,7 +3,7 @@
 using Eigen::MatrixXd;
 
 double _sigmoid_function(double x) { return 1 / (1 + exp(-x)); }
-double _derivative_sigmoid_function(double x) { return x * (1 - x); }
+double _derivative_sigmoid_function(double x) { double _x = _sigmoid_function(x); return _x * (1 - _x); }
 
 MatrixXd ActivationLayer::_sigmoid(MatrixXd X) {
     MatrixXd newX = X.unaryExpr(&_sigmoid_function);
@@ -12,7 +12,7 @@ MatrixXd ActivationLayer::_sigmoid(MatrixXd X) {
 
 MatrixXd ActivationLayer::_derivative_sigmoid(MatrixXd X) {
     MatrixXd newX = X.unaryExpr(&_derivative_sigmoid_function);
-    newX = newX.unaryExpr(&_derivative_sigmoid_function);
+//    newX = newX.unaryExpr(&_derivative_sigmoid_function);
     return newX;
 };
 
@@ -64,10 +64,10 @@ MatrixXd ActivationLayer::backward(MatrixXd chain_error){
 	if(config.verbose){
 		std::cout<<"Activation backward started"<<std::endl;
 	}
-	MatrixXd t = _activ_function(chain_error);
+	MatrixXd t = _deriv_function(value);
 	if(config.verbose){
 		std::cout<<"Activation backward ended"<<std::endl;
 	}
-	return _deriv_function(t);
+    return t.cwiseProduct(chain_error);
 };
 

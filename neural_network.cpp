@@ -32,7 +32,9 @@ void NeuralNetwork::fit(MatrixXd X, MatrixXd y)
 		}
 
 		// * Cost function
-		MatrixXd chain_error = y - curr;	
+//        std::cout << "first chain error is : \n";
+        MatrixXd chain_error = y - curr;
+//        std::cout << chain_error << std::endl;
 
 		// * Back propagation
 		if(config.verbose){
@@ -42,6 +44,8 @@ void NeuralNetwork::fit(MatrixXd X, MatrixXd y)
 		for (int i = layers.size() - 1; i >= 0; i--)
 		{
 			chain_error = layers[i]->backward(chain_error);
+//            std::cout << "in loop chain error is : \n";
+//            std::cout << chain_error << std::endl;
 		}
 		if(config.verbose){
 			std::cout << "Backward propagation ended" << std::endl;
