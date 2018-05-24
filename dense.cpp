@@ -50,7 +50,7 @@ MatrixXd DenseLayer::backward(MatrixXd chain_error){
 	w = config.inertia * changed_w + (1 - config.inertia) * w;
 	b = config.inertia * changed_b + (1 - config.inertia) * b;
 	if(config.verbose){
-/		std::cout<<"Dense backward ended"<<std::endl;
+		std::cout<<"Dense backward ended"<<std::endl;
 	}
 
 //    std::cout << "cost is : \n";

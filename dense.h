@@ -5,6 +5,7 @@
 #include <Eigen/Dense>
 #include "layer.h"
 #include "neural_network_config.h"
+#include <cmath>
 
 using Eigen::MatrixXd;
 

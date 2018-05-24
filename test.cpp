@@ -64,10 +64,13 @@ int main()
 
 	conf.epochs = 20000;
 	conf.lr = 0.4;
+
 	NeuralNetwork nn(conf);
-	nn.add(new DenseLayer(2, 6));
+	nn.add(new DenseLayer(2, 5));
 	nn.add(new ActivationLayer("sigmoid"));
-	nn.add(new DenseLayer(6, 1));
+	nn.add(new DenseLayer(5, 3));
+	nn.add(new ActivationLayer("sigmoid"));
+	nn.add(new DenseLayer(3, 1));
 	nn.add(new ActivationLayer("sigmoid"));
 
 
@@ -78,11 +81,8 @@ int main()
 	y << 0, 1, 1, 0;
 
 
-	std::cout<<"fit"<<std::endl;
 	nn.fit(X, y);
-	std::cout<<"predict"<<std::endl;
 	MatrixXd predictions = nn.predict(X);
-	std::cout<<"result"<<std::endl;
 	std::cout<<predictions<<std::endl;
 
 }
