@@ -62,3 +62,48 @@ MatrixXd NeuralNetwork::predict(MatrixXd X)
 	}
 	return curr;
 }
+
+int _get_max_ind(MatrixXd A, int row){
+	int maxi=0;
+	double maxv=0;
+	for(int col=0; col<A.cols(); ++col){
+		if (A(row, col) > maxv){
+			maxv = A(row, col);
+			maxi = col;
+		}
+	}
+	return maxi;
+}
+
+
+double NeuralNetwork::accuracy_regression(MatrixXd X, MatrixXd y){
+	MatrixXd res = predict(X);
+	res -= y;
+	res = res.cwiseProduct(res);
+	return res.sum();
+}
+
+double NeuralNetwork::accuracy_classification(MatrixXd X, MatrixXd y){
+	MatrixXd res = predict(X);
+	double corr = 0;
+	for(int i = 0; i < res.rows(); i++){
+		if(_get_max_ind(res, i) == _get_max_ind(y, i)){
+			corr++;
+		}
+	}
+	return corr / res.rows();
+
+}
+
+std::vector<std::string> NeuralNetwork::predict_labled(MatrixXd X, std::map<int, std::string> m){
+	MatrixXd res = predict(X);
+	std::vector<std::string> pred;
+	int key;
+	for(int i = 0; i < res.rows(); i++){
+		key = _get_max_ind(res, i);
+		pred.push_back(m.at(key));
+	}
+	return pred;
+}
+
+	

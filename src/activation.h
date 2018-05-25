@@ -13,6 +13,10 @@ private:
 	MatrixXd _sigmoid(MatrixXd X);
     MatrixXd _derivative_sigmoid(MatrixXd X);
 
+	MatrixXd _relu(MatrixXd X);
+    MatrixXd _derivative_relu(MatrixXd X);
+
+
 	MatrixXd _activ_function(MatrixXd X);
 	MatrixXd _deriv_function(MatrixXd X);
 

@@ -5,11 +5,14 @@ using Eigen::MatrixXd;
 double _sigmoid_function(double x) { return 1 / (1 + exp(-x)); }
 double _derivative_sigmoid_function(double x) { double _x = _sigmoid_function(x); return _x * (1 - _x); }
 
+double _relu_function(double x) { return x < 0 ? 0 : x; }
+double _derivative_relu_function(double x) { return x <= 0 ? 0 : 1; }
+
+
 MatrixXd ActivationLayer::_sigmoid(MatrixXd X) {
     MatrixXd newX = X.unaryExpr(&_sigmoid_function);
     return newX;
 };
-
 MatrixXd ActivationLayer::_derivative_sigmoid(MatrixXd X) {
     MatrixXd newX = X.unaryExpr(&_derivative_sigmoid_function);
     return newX;
@@ -17,23 +20,36 @@ MatrixXd ActivationLayer::_derivative_sigmoid(MatrixXd X) {
 
 
 
+MatrixXd ActivationLayer::_relu(MatrixXd X) {
+    MatrixXd newX = X.unaryExpr(&_relu_function);
+    return newX;
+};
+MatrixXd ActivationLayer::_derivative_relu(MatrixXd X) {
+    MatrixXd newX = X.unaryExpr(&_derivative_relu_function);
+    return newX;
+};
+
+
+
+
 MatrixXd ActivationLayer::_activ_function(MatrixXd X){
 	if(activation_name == "sigmoid"){
 		return _sigmoid(X);
+	}	
+	if(activation_name == "relu"){
+		return _relu(X);
 	}
-	else{
-		return _sigmoid(X);
-	}
+	return _sigmoid(X);
 }
-
 
 MatrixXd ActivationLayer::_deriv_function(MatrixXd X){
 	if(activation_name == "sigmoid"){
 		return _derivative_sigmoid(X);
+	}	
+	if(activation_name == "relu"){
+		return _derivative_relu(X);
 	}
-	else{
-		return _derivative_sigmoid(X);
-	}
+	return _derivative_sigmoid(X);
 }
 
 
