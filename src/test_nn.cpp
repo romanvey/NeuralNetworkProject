@@ -38,10 +38,9 @@ int main()
 	for(int i = 0; i < t1.rows(); i++){
 		t1.row(i) += t2;
 	}
-	//	std::cout << t1 << std::endl;
-	//	std::cout << "Vector adding Test ended" << std::endl;
 
-	// divide_matrix after split_X_Y
+
+	// shuffle_vector > one_hot_encode > vector2matrix > divide_matrix > split_X_Y
 
 	auto A = csv2vector("../resources/iris_old.csv", ',');
 	
@@ -64,7 +63,6 @@ int main()
 	auto X_test = X_y_test.first;
 	auto y_test = X_y_test.second;
 	
-
 	NeuralNetworkConfig conf;
 	conf.epochs = 8000;
 	conf.lr = 0.005;
@@ -78,7 +76,6 @@ int main()
 	nn.fit(X_train, y_train);
 	cout<<"Train score: "<<nn.accuracy_classification(X_train, y_train)<<endl;
 	cout<<"Test score: "<<nn.accuracy_classification(X_test, y_test)<<endl;
-
 
 	cout<<nn.predict(X_train.block(0, 0, 1, X_train.cols()))<<endl;
 	cout<<nn.predict_labled(X_train.block(0, 0, 1, X_train.cols()), key_map)[0]<<endl;
