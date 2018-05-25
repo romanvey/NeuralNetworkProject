@@ -1,5 +1,13 @@
 #include "dense.h"
 
+MatrixXd dot(MatrixXd a, MatrixXd b){
+	// TODO: implement more multiplications
+	return a * b;
+}
+
+
+
+
 DenseLayer::DenseLayer(int input_nodes, int output_nodes){
 	this->input_nodes = input_nodes;
 	this->output_nodes = output_nodes;
@@ -11,13 +19,12 @@ DenseLayer::DenseLayer(int input_nodes, int output_nodes){
 }
 
 MatrixXd DenseLayer::forward(MatrixXd X, NeuralNetworkConfig config){
-	// ! Parallelized
 	if(config.verbose){
 		std::cout<<"Dense forward started"<<std::endl;
 	}
 	this->config = config;
 	value = X;
-	MatrixXd result = X*w;
+	MatrixXd result = dot(X,w);
 
 	for(int i = 0; i < result.rows(); i++){
 		result.row(i) += b;
@@ -37,14 +44,12 @@ MatrixXd DenseLayer::forward(MatrixXd X, NeuralNetworkConfig config){
 
 
 MatrixXd DenseLayer::backward(MatrixXd chain_error){
-
 	if(config.verbose){
 		std::cout<<"Dense backward started"<<std::endl;
 	}
-	MatrixXd result = chain_error*w.transpose();
+	MatrixXd result = dot(chain_error, w.transpose());
 
-
-	MatrixXd changed_w = w + ((value.transpose() * chain_error) * config.lr);
+	MatrixXd changed_w = w + (dot(value.transpose(), chain_error) * config.lr);
 	MatrixXd changed_b = b + (chain_error.colwise().sum() * config.lr);
 	
 	w = config.inertia * changed_w + (1 - config.inertia) * w;
