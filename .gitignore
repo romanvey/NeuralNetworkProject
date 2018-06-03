@@ -4,3 +4,4 @@
 .vscode/
 .ipynb_checkpoints/
 resources/*.csv
+playground/
