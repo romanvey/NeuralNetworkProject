@@ -6,6 +6,7 @@
 #include "neural_network_config.h"
 #include "dense.h"
 #include "activation.h"
+#include <fstream>
 #include <iostream>
 #include <utility>
 

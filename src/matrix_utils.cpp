@@ -213,3 +213,49 @@ pair <Eigen::MatrixXd, Eigen::MatrixXd> split_X_y(Eigen::MatrixXd &A, std::vecto
 	pair <Eigen::MatrixXd, Eigen::MatrixXd> p(A, y);
 	return p;
 }
+
+Eigen::MatrixXd read_matrix(std::ifstream &from, int nrows, int ncols){
+    Eigen::MatrixXd X = Eigen::MatrixXd::Zero(nrows,ncols);
+    if (from.is_open())
+    {
+        for (int row = 0; row < nrows; row++)
+            for (int col = 0; col < ncols; col++)
+            {
+                float item = 0.0;
+                from >> item;
+                X(row, col) = item;
+            }
+    }
+    return X;
+}
+
+
+Eigen::MatrixXd read_matrix(std::ifstream &from){
+    Eigen::MatrixXd X;
+	if (from.is_open())
+    {
+		int nrows, ncols;
+		from >> nrows >> ncols;
+		X = Eigen::MatrixXd::Zero(nrows,ncols);
+        for (int row = 0; row < nrows; row++)
+            for (int col = 0; col < ncols; col++)
+            {
+                float item = 0.0;
+                from >> item;
+                X(row, col) = item;
+            }
+    }
+    return X;
+}
+
+
+void save_matrix(std::ofstream &to, Eigen::MatrixXd &A, int with_header){
+	Eigen::IOFormat CommaInitFmt(StreamPrecision, DontAlignCols, " ", "\n", "", "", "", "");
+    if (to.is_open())
+    {
+		if (with_header){
+			to << A.rows() << " " << A.cols() << std::endl;
+		}
+        to << A.format(CommaInitFmt);
+    }
+}

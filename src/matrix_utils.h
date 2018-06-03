@@ -21,5 +21,8 @@ std::map<int, std::string > one_hot_encode(std::vector<std::vector<std::string>>
 void shuffle_vector(std::vector<std::vector<std::string>> &M);
 std::pair <Eigen::MatrixXd, Eigen::MatrixXd> split_X_y(Eigen::MatrixXd &A, std::vector<int> y_ind);
 std::pair <Eigen::MatrixXd, Eigen::MatrixXd> divide_matrix(const Eigen::MatrixXd  &M, double percentile);
+Eigen::MatrixXd read_matrix(std::ifstream &from, int nrows, int ncols);
+Eigen::MatrixXd read_matrix(std::ifstream &from);
+void save_matrix(std::ofstream &to, Eigen::MatrixXd &A, int with_header);
 
 #endif //NN_CSV_H

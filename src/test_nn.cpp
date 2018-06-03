@@ -3,6 +3,10 @@
 using Eigen::MatrixXd;
 using namespace std;
 
+
+
+
+
 int main() {
     // * DenseLayer Tests
 //	std::cout << "DenseLayer Test started" << std::endl;
@@ -40,50 +44,65 @@ int main() {
     //	std::cout << t1 << std::endl;
     //	std::cout << "Vector adding Test ended" << std::endl;
 
-    // divide_matrix after split_X_Y
+    // NeuralNetwork test
 
-    auto A = csv2vector("../resources/iris_old.csv", ',');
+    // auto A = csv2vector("../resources/iris_old.csv", ',');
 
-    shuffle_vector(A);
-    auto key_map = one_hot_encode(A, 4);
-    auto X = vector2matrix(A);
+    // shuffle_vector(A);
+    // auto key_map = one_hot_encode(A, 4);
+    // auto X = vector2matrix(A);
 
-    auto train_test = divide_matrix(X, 0.7);
-    auto train = train_test.first;
-    auto test = train_test.second;
+    // auto train_test = divide_matrix(X, 0.7);
+    // auto train = train_test.first;
+    // auto test = train_test.second;
 
-    // ! tihs is ugly
-    vector<int> y_cols(3);
-    y_cols[0] = 4;
-    y_cols[1] = 5;
-    y_cols[2] = 6;
+    // // ! tihs is ugly
+    // vector<int> y_cols(3);
+    // y_cols[0] = 4;
+    // y_cols[1] = 5;
+    // y_cols[2] = 6;
 
-    auto X_y_train = split_X_y(train, y_cols);
-    auto X_train = X_y_train.first;
-    auto y_train = X_y_train.second;
+    // auto X_y_train = split_X_y(train, y_cols);
+    // auto X_train = X_y_train.first;
+    // auto y_train = X_y_train.second;
 
-    auto X_y_test = split_X_y(test, y_cols);
-    auto X_test = X_y_test.first;
-    auto y_test = X_y_test.second;
-
-
-    NeuralNetworkConfig conf;
-    conf.epochs = 8000;
-    conf.lr = 0.005;
-    NeuralNetwork nn(conf);
-
-    nn.add(new DenseLayer(4, 6));
-    nn.add(new ActivationLayer("relu"));
-    nn.add(new DenseLayer(6, 6));
-    nn.add(new ActivationLayer("relu"));
-    nn.add(new DenseLayer(6, 3));
-    nn.add(new ActivationLayer("sigmoid"));
-
-    nn.fit(X_train, y_train);
-    cout << "Train score: " << nn.accuracy_classification(X_train, y_train) << endl;
-    cout << "Test score: " << nn.accuracy_classification(X_test, y_test) << endl;
+    // auto X_y_test = split_X_y(test, y_cols);
+    // auto X_test = X_y_test.first;
+    // auto y_test = X_y_test.second;
 
 
-    cout << nn.predict(X_train.block(0, 0, 1, X_train.cols())) << endl;
-    cout << nn.predict_labled(X_train.block(0, 0, 1, X_train.cols()), key_map)[0] << endl;
+    // NeuralNetworkConfig conf;
+    // conf.epochs = 8000;
+    // conf.lr = 0.005;
+    // NeuralNetwork nn(conf);
+
+    // nn.add(new DenseLayer(4, 6));
+    // nn.add(new ActivationLayer("relu"));
+    // nn.add(new DenseLayer(6, 6));
+    // nn.add(new ActivationLayer("relu"));
+    // nn.add(new DenseLayer(6, 3));
+    // nn.add(new ActivationLayer("sigmoid"));
+
+    // nn.fit(X_train, y_train);
+    // cout << "Train score: " << nn.accuracy_classification(X_train, y_train) << endl;
+    // cout << "Test score: " << nn.accuracy_classification(X_test, y_test) << endl;
+
+
+    // cout << nn.predict(X_train.block(0, 0, 1, X_train.cols())) << endl;
+    // cout << nn.predict_labled(X_train.block(0, 0, 1, X_train.cols()), key_map)[0] << endl;
+
+
+
+    ifstream fin ("../resources/data.txt");
+    MatrixXd myX = read_matrix(fin);
+    MatrixXd myY = read_matrix(fin);
+    fin.close();
+    cout << "X = " << endl << myX << endl;
+    cout << "Y = " << endl << myY << endl;
+
+    std::ofstream fout("../resources/result.txt");
+    save_matrix(fout, myY, 1);
+    fout.close();
+
+
 }
