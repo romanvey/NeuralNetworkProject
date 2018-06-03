@@ -3,7 +3,7 @@
 #include <thread>
 #include <Eigen/Dense>
 #include <mutex>
-#include "matrix_multiplication.h"
+#include "threads_multiplication.h"
 
 using std::mutex;
 using std::vector;

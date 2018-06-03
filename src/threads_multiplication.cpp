@@ -1,4 +1,4 @@
-#include "matrix_multiplication.h"
+#include "threads_multiplication.h"
 
 void _mult(const Eigen::MatrixXd &m1, const Eigen::MatrixXd &m2, Eigen::MatrixXd &res, mutex &mux){
     Eigen::MatrixXd t = m1 * m2;

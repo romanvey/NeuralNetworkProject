@@ -17,7 +17,7 @@ set(CMAKE_CXX_STANDARD 14)
 # Example of usage of our library
 # add_executable(test_nn ${src_nn_files})
 # add_executable(test_utils ${src_utils_files})
-add_executable(test_mm src/test_mm.cpp src/matrix_multiplication.h src/matrix_multiplication.cpp)
+add_executable(test_mm src/test_mm.cpp src/threads_multiplication.h src/threads_multiplication.cpp)
 #add_executable(mm playground/mm.cpp)
 
 # target_link_libraries (test_nn Eigen3::Eigen)
