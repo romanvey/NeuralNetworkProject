@@ -30,6 +30,8 @@ public:
 
     MatrixXd forward(MatrixXd X, NeuralNetworkConfig config) override;
     MatrixXd backward(MatrixXd chain_error) override;
+	void save_layer(std::ofstream &to) override;
+	void load_layer(std::ifstream &from) override;
 };
 
 #endif //NN_ACTIVATION_H

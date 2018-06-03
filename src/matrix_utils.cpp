@@ -249,8 +249,8 @@ Eigen::MatrixXd read_matrix(std::ifstream &from){
 }
 
 
-void save_matrix(std::ofstream &to, Eigen::MatrixXd &A, int with_header){
-	Eigen::IOFormat CommaInitFmt(StreamPrecision, DontAlignCols, " ", "\n", "", "", "", "");
+void save_matrix(std::ofstream &to, Eigen::MatrixXd &A, bool with_header){
+	Eigen::IOFormat CommaInitFmt(StreamPrecision, DontAlignCols, " ", "\n", "", "", "", "\n");
     if (to.is_open())
     {
 		if (with_header){

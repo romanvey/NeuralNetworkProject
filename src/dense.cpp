@@ -9,6 +9,7 @@ MatrixXd dot(MatrixXd a, MatrixXd b){
 
 
 DenseLayer::DenseLayer(int input_nodes, int output_nodes){
+	this->type = 0;
 	this->input_nodes = input_nodes;
 	this->output_nodes = output_nodes;
 	w = MatrixXd::Random(input_nodes ,output_nodes);
@@ -17,6 +18,12 @@ DenseLayer::DenseLayer(int input_nodes, int output_nodes){
 //	b = MatrixXd::Zero(1 ,output_nodes);
 
 }
+
+DenseLayer::DenseLayer(){
+	this->type = 0;
+}
+
+
 
 MatrixXd DenseLayer::forward(MatrixXd X, NeuralNetworkConfig config){
 	if(config.verbose){
@@ -66,4 +73,22 @@ MatrixXd DenseLayer::backward(MatrixXd chain_error){
 //    std::cout << w << std::endl;
 
 	return result;
+}
+
+
+void DenseLayer::save_layer(std::ofstream &to){
+	save_matrix(to, w, 1);
+	save_matrix(to, b, 1);
+}
+
+void DenseLayer::load_layer(std::ifstream &from){
+	if(from.is_open()){
+		int nrows, ncols;
+		from >> nrows >> ncols;
+		this->input_nodes = nrows;
+		this->output_nodes = ncols;
+		std::cout<<"Load layer"<<nrows<<" "<<ncols<<std::endl;
+		w = read_matrix(from, nrows, ncols);
+		b = read_matrix(from);	
+	}
 }

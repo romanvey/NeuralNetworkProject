@@ -54,9 +54,13 @@ MatrixXd ActivationLayer::_deriv_function(MatrixXd X){
 
 
 ActivationLayer::ActivationLayer(std::string activation_name){
+	this->type = 1;
 	this->activation_name = activation_name;
 }
-ActivationLayer::ActivationLayer(){}
+ActivationLayer::ActivationLayer(){
+	this->type = 1;
+	this->activation_name = "relu";
+}
 
 
 
@@ -86,3 +90,15 @@ MatrixXd ActivationLayer::backward(MatrixXd chain_error){
     return t.cwiseProduct(chain_error);
 };
 
+
+void ActivationLayer::save_layer(std::ofstream &to){
+	if (to.is_open()){
+        to << activation_name << std::endl;
+    }
+};
+void ActivationLayer::load_layer(std::ifstream &from){
+    if (from.is_open()){
+        from >> this->activation_name;
+
+    }
+};

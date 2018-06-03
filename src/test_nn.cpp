@@ -71,18 +71,27 @@ int main() {
     // auto y_test = X_y_test.second;
 
 
-    // NeuralNetworkConfig conf;
-    // conf.epochs = 8000;
-    // conf.lr = 0.005;
-    // NeuralNetwork nn(conf);
+    NeuralNetworkConfig conf;
+    conf.epochs = 8000;
+    conf.lr = 0.005;
+    NeuralNetwork nn(conf);
 
-    // nn.add(new DenseLayer(4, 6));
-    // nn.add(new ActivationLayer("relu"));
-    // nn.add(new DenseLayer(6, 6));
-    // nn.add(new ActivationLayer("relu"));
-    // nn.add(new DenseLayer(6, 3));
-    // nn.add(new ActivationLayer("sigmoid"));
+    nn.add(new DenseLayer(4, 6));
+    nn.add(new ActivationLayer("relu"));
+    nn.add(new DenseLayer(6, 6));
+    nn.add(new ActivationLayer("relu"));
+    nn.add(new DenseLayer(6, 3));
+    nn.add(new ActivationLayer("sigmoid"));
 
+
+    // Test saving/loading
+    nn.save_model("../resources/model.txt");
+    NeuralNetwork nn2;
+    nn2.load_model("../resources/model.txt");
+    nn2.save_model("../resources/model2.txt");
+
+
+    // Test fitting/predicting
     // nn.fit(X_train, y_train);
     // cout << "Train score: " << nn.accuracy_classification(X_train, y_train) << endl;
     // cout << "Test score: " << nn.accuracy_classification(X_test, y_test) << endl;
@@ -93,16 +102,16 @@ int main() {
 
 
 
-    ifstream fin ("../resources/data.txt");
-    MatrixXd myX = read_matrix(fin);
-    MatrixXd myY = read_matrix(fin);
-    fin.close();
-    cout << "X = " << endl << myX << endl;
-    cout << "Y = " << endl << myY << endl;
+    // ifstream fin ("../resources/data.txt");
+    // MatrixXd myX = read_matrix(fin);
+    // MatrixXd myY = read_matrix(fin);
+    // fin.close();
+    // cout << "X = " << endl << myX << endl;
+    // cout << "Y = " << endl << myY << endl;
 
-    std::ofstream fout("../resources/result.txt");
-    save_matrix(fout, myY, 1);
-    fout.close();
+    // std::ofstream fout("../resources/result.txt");
+    // save_matrix(fout, myY, 1);
+    // fout.close();
 
 
 }

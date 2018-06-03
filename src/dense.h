@@ -4,6 +4,7 @@
 #include<random>
 #include <Eigen/Dense>
 #include "layer.h"
+#include "matrix_utils.h"
 #include "neural_network_config.h"
 #include <cmath>
 
@@ -16,8 +17,11 @@ private:
 	MatrixXd w, b, value;
 public:
 	DenseLayer(int input_nodes, int output_nodes);
+	DenseLayer();
     MatrixXd forward(MatrixXd X, NeuralNetworkConfig config) override;
     MatrixXd backward(MatrixXd chain_error) override;
+	void save_layer(std::ofstream &to) override;
+	void load_layer(std::ifstream &from) override;
 };
 
 

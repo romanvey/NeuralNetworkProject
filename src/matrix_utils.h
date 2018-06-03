@@ -23,6 +23,6 @@ std::pair <Eigen::MatrixXd, Eigen::MatrixXd> split_X_y(Eigen::MatrixXd &A, std::
 std::pair <Eigen::MatrixXd, Eigen::MatrixXd> divide_matrix(const Eigen::MatrixXd  &M, double percentile);
 Eigen::MatrixXd read_matrix(std::ifstream &from, int nrows, int ncols);
 Eigen::MatrixXd read_matrix(std::ifstream &from);
-void save_matrix(std::ofstream &to, Eigen::MatrixXd &A, int with_header);
+void save_matrix(std::ofstream &to, Eigen::MatrixXd &A, bool with_header);
 
 #endif //NN_CSV_H

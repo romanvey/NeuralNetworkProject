@@ -106,4 +106,37 @@ std::vector<std::string> NeuralNetwork::predict_labled(MatrixXd X, std::map<int,
 	return pred;
 }
 
-	
+void NeuralNetwork::save_model(std::string name){
+	// 0 - Dense, 1 - Activation
+	// 0 -> 2 matrices with size headers
+	// 1 -> Nothing
+    std::ofstream fout(name);
+	int type, model_size = layers.size();
+	config.save_conf(fout);
+	fout<<model_size<<std::endl;
+	for(int i = 0; i < model_size; i++){
+		type = layers[i]->type;
+		fout<<type<<std::endl;
+		layers[i]->save_layer(fout);
+	}
+	fout.close();
+}
+
+void NeuralNetwork::load_model(std::string name){
+	int type, model_size;
+	std::ifstream fin (name);
+	layers.clear();
+	config.load_conf(fin);
+	fin >> model_size;
+	for(int i = 0; i < model_size; i++){
+		fin >> type;
+		if(type == 0){
+			this->add(new DenseLayer);
+		}
+		if(type == 1){
+			this->add(new ActivationLayer);
+		}
+		layers[i]->load_layer(fin);
+	}
+
+}
