@@ -15,16 +15,21 @@ file(GLOB src_nn_files
  )
 
 file(GLOB threads_files
-        "thread/*.h"
-        "thread/*.cpp"
+        "threads/*.h"
+        "threads/*.cpp"
+        )
+
+file(GLOB mpi_files
+        "mpi/*.h"
+        "mpi/*.cpp"
         )
 
 # Example of usage of our library
- add_executable(test_nn ${src_nn_files} ${threads_files})
-# add_executable(test_utils ${src_utils_files})
-#add_executable(test_mm thread/test_mm.cpp thread/threads_multiplication.h thread/threads_multiplication.cpp)
-#add_executable(mm playground/mm.cpp)
+add_executable(test_nn ${src_nn_files} ${threads_files} ${mpi_files} tests/test_nn.cpp tests/test_nn.h)
+add_executable(test_utils ${src_utils_files} tests/test_utils.cpp tests/test_utils.h)
+add_executable(test_threads ${threads_files} tests/test_threads.cpp)
+add_executable(test_mpi ${mpi_files} tests/test_mpi.cpp)
 
- target_link_libraries (test_nn Eigen3::Eigen ${CMAKE_THREAD_LIBS_INIT})
-# target_link_libraries (test_utils Eigen3::Eigen)
-#target_link_libraries (test_mm Eigen3::Eigen ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries (test_nn Eigen3::Eigen ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries (test_utils Eigen3::Eigen)
+target_link_libraries (test_threads Eigen3::Eigen ${CMAKE_THREAD_LIBS_INIT})

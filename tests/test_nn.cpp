@@ -44,7 +44,7 @@ int main() {
     //	std::cout << t1 << std::endl;
     //	std::cout << "Vector adding Test ended" << std::endl;
 
-    // NeuralNetwork test
+    // NeuralNetwork tests
 
      auto A = csv2vector("../resources/iris_old.csv", ',');
 //
