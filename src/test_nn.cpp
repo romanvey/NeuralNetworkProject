@@ -46,34 +46,35 @@ int main() {
 
     // NeuralNetwork test
 
-    // auto A = csv2vector("../resources/iris_old.csv", ',');
-
-    // shuffle_vector(A);
-    // auto key_map = one_hot_encode(A, 4);
-    // auto X = vector2matrix(A);
-
-    // auto train_test = divide_matrix(X, 0.7);
-    // auto train = train_test.first;
-    // auto test = train_test.second;
-
-    // // ! tihs is ugly
-    // vector<int> y_cols(3);
-    // y_cols[0] = 4;
-    // y_cols[1] = 5;
-    // y_cols[2] = 6;
-
-    // auto X_y_train = split_X_y(train, y_cols);
-    // auto X_train = X_y_train.first;
-    // auto y_train = X_y_train.second;
-
-    // auto X_y_test = split_X_y(test, y_cols);
-    // auto X_test = X_y_test.first;
-    // auto y_test = X_y_test.second;
+     auto A = csv2vector("../resources/iris_old.csv", ',');
+//
+     shuffle_vector(A);
+     auto key_map = one_hot_encode(A, 4);
+     auto X = vector2matrix(A);
+//
+     auto train_test = divide_matrix(X, 0.7);
+     auto train = train_test.first;
+     auto test = train_test.second;
+//
+     // ! tihs is ugly
+     vector<int> y_cols(3);
+     y_cols[0] = 4;
+     y_cols[1] = 5;
+     y_cols[2] = 6;
+//
+     auto X_y_train = split_X_y(train, y_cols);
+     auto X_train = X_y_train.first;
+     auto y_train = X_y_train.second;
+//
+     auto X_y_test = split_X_y(test, y_cols);
+     auto X_test = X_y_test.first;
+     auto y_test = X_y_test.second;
 
 
     NeuralNetworkConfig conf;
-    conf.epochs = 8000;
+    conf.epochs = 800;
     conf.lr = 0.005;
+    conf.threads = 10;
     NeuralNetwork nn(conf);
 
     nn.add(new DenseLayer(4, 6));
@@ -91,27 +92,27 @@ int main() {
     nn2.save_model("../resources/model2.txt");
 
 
-    // Test fitting/predicting
-    // nn.fit(X_train, y_train);
-    // cout << "Train score: " << nn.accuracy_classification(X_train, y_train) << endl;
-    // cout << "Test score: " << nn.accuracy_classification(X_test, y_test) << endl;
+//     Test fitting/predicting
+     nn.fit(X_train, y_train);
+     cout << "Train score: " << nn.accuracy_classification(X_train, y_train) << endl;
+     cout << "Test score: " << nn.accuracy_classification(X_test, y_test) << endl;
 
 
-    // cout << nn.predict(X_train.block(0, 0, 1, X_train.cols())) << endl;
-    // cout << nn.predict_labled(X_train.block(0, 0, 1, X_train.cols()), key_map)[0] << endl;
-
-
-
-    // ifstream fin ("../resources/data.txt");
-    // MatrixXd myX = read_matrix(fin);
-    // MatrixXd myY = read_matrix(fin);
-    // fin.close();
-    // cout << "X = " << endl << myX << endl;
-    // cout << "Y = " << endl << myY << endl;
-
-    // std::ofstream fout("../resources/result.txt");
-    // save_matrix(fout, myY, 1);
-    // fout.close();
+     cout << nn.predict(X_train.block(0, 0, 1, X_train.cols())) << endl;
+     cout << nn.predict_labled(X_train.block(0, 0, 1, X_train.cols()), key_map)[0] << endl;
+//
+//
+//
+     ifstream fin ("../resources/data.txt");
+     MatrixXd myX = read_matrix(fin);
+     MatrixXd myY = read_matrix(fin);
+     fin.close();
+     cout << "X = " << endl << myX << endl;
+     cout << "Y = " << endl << myY << endl;
+//
+     std::ofstream fout("../resources/result.txt");
+     save_matrix(fout, myY, 1);
+     fout.close();
 
 
 }

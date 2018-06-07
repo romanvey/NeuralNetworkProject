@@ -1,8 +1,17 @@
 #include "dense.h"
 
-MatrixXd dot(MatrixXd a, MatrixXd b){
+MatrixXd dot(MatrixXd a, MatrixXd b, NeuralNetworkConfig config){
 	// TODO: implement more multiplications
-	return a * b;
+	if (config.use_mpi){
+	    // TODO: MPI
+	}
+	else if (config.threads == 0){
+        return a * b;
+	}
+	else {
+	    int _n = config.threads;
+	    return mult_with_threads(_n, a, b);
+	}
 }
 
 
@@ -31,7 +40,7 @@ MatrixXd DenseLayer::forward(MatrixXd X, NeuralNetworkConfig config){
 	}
 	this->config = config;
 	value = X;
-	MatrixXd result = dot(X,w);
+	MatrixXd result = dot(X, w, config);
 
 	for(int i = 0; i < result.rows(); i++){
 		result.row(i) += b;
@@ -54,9 +63,9 @@ MatrixXd DenseLayer::backward(MatrixXd chain_error){
 	if(config.verbose){
 		std::cout<<"Dense backward started"<<std::endl;
 	}
-	MatrixXd result = dot(chain_error, w.transpose());
+	MatrixXd result = dot(chain_error, w.transpose(), config);
 
-	MatrixXd changed_w = w + (dot(value.transpose(), chain_error) * config.lr);
+	MatrixXd changed_w = w + (dot(value.transpose(), chain_error, config) * config.lr);
 	MatrixXd changed_b = b + (chain_error.colwise().sum() * config.lr);
 	
 	w = config.inertia * changed_w + (1 - config.inertia) * w;

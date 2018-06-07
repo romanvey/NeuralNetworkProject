@@ -7,6 +7,7 @@ void NeuralNetworkConfig::save_conf(std::ofstream &to){
         to << lr << std::endl;
         to << inertia << std::endl;
         to << threads << std::endl;
+        to << use_mpi << std::endl;
     }
 }
 
@@ -17,5 +18,6 @@ void NeuralNetworkConfig::load_conf(std::ifstream &from){
         from >> this->lr;
         from >> this->inertia;
         from >> this->threads;
+        from >> this->use_mpi;
     }
 }

@@ -12,6 +12,7 @@ class NeuralNetworkConfig
         double lr = 0.1;
 		double inertia = 1; // w = inertia * (changed_w) + (1 - inertia) * (prev_w)
 		int threads = 0;
+		bool use_mpi = false;
 		void save_conf(std::ofstream &to);
 		void load_conf(std::ifstream &from);
 };
