@@ -14,6 +14,7 @@ Eigen::MatrixXd mult_with_threads(const int n, const Eigen::MatrixXd &m1, const 
     vector<Eigen::MatrixXd> results((unsigned long) n);
     vector<Eigen::MatrixXd> blocks((unsigned long) n);
 
+    // multuply
     mutex mux;
     for (int i = 0; i < n - 1; ++i) {
         int from = (m1_height / n) * i;
@@ -22,6 +23,7 @@ Eigen::MatrixXd mult_with_threads(const int n, const Eigen::MatrixXd &m1, const 
         threads[i] = thread(_mult, ref(blocks[i]), ref(m2), ref(results[i]), ref(mux));
     }
 
+    // merge blocks
     int from = (m1_height / n) * (n - 1);
     int to = m1_height - from;
     blocks[n - 1] = m1.block(from, 0, to, m1_width);

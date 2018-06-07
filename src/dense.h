@@ -6,7 +6,7 @@
 #include "layer.h"
 #include "matrix_utils.h"
 #include "neural_network_config.h"
-#include "../thread/threads_utils.h"
+#include "../threads/threads_utils.h"
 #include <cmath>
 
 using Eigen::MatrixXd;

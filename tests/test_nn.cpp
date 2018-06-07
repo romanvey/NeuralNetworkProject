@@ -4,9 +4,6 @@ using Eigen::MatrixXd;
 using namespace std;
 
 
-
-
-
 int main() {
     // * DenseLayer Tests
 //	std::cout << "DenseLayer Test started" << std::endl;
