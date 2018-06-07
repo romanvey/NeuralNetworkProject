@@ -3,7 +3,7 @@
 #include <thread>
 #include <Eigen/Dense>
 #include <mutex>
-#include "threads_multiplication.h"
+#include "threads_utils.h"
 #include <chrono>
 
 using std::mutex;
