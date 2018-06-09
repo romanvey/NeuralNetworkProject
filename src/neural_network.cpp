@@ -22,7 +22,7 @@ void NeuralNetwork::fit(MatrixXd X, MatrixXd y)
 	{
 		// * Forward propagation
 		if(config.verbose){
-			std::cout<<"Epoch " << epoch << std:: endl; 
+			std::cout<<"Epoch " << epoch + 1 << "/" << config.epochs << std::endl; 
 			std::cout << "Forward propagation started" << std::endl;
 		}
 		MatrixXd curr = X;

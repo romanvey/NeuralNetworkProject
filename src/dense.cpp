@@ -1,11 +1,7 @@
 #include "dense.h"
 
 MatrixXd dot(MatrixXd a, MatrixXd b, NeuralNetworkConfig config){
-	// TODO: implement more multiplications
-	if (config.use_mpi){
-	    // TODO: MPI
-	}
-	else if (config.threads == 0){
+	if (config.threads == 0){
         return a * b;
 	}
 	else {

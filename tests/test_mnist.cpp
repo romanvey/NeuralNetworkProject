@@ -43,20 +43,27 @@ int main() {
 
     // NeuralNetwork tests
 
-     auto A = csv2vector("../resources/iris_old.csv", ',');
+     auto A = csv2vector("../resources/mnist_test.csv", ',');
 //
-     shuffle_vector(A);
-     auto key_map = one_hot_encode(A, 4);
-     auto X = vector2matrix(A);
+	cout<<"Readed"<<endl;
+    shuffle_vector(A);
+	cout<<"Shuffled"<<endl;	 
+    auto key_map = one_hot_encode(A, 0);
+	cout<<"Encoded"<<endl;     
+	auto X = vector2matrix(A);
+	cout<<"Transformed"<<endl;
+	
 //
-     auto train_test = divide_matrix(X, 0.7);
-     auto train = train_test.first;
-     auto test = train_test.second;
+    auto train_test = divide_matrix(X, 0.7);
+    auto train = train_test.first;
+    auto test = train_test.second;
+	cout<<"Test/train divided"<<endl;
+	 
 //
-     vector<int> y_cols(3);
-     y_cols[0] = 4;
-     y_cols[1] = 5;
-     y_cols[2] = 6;
+     vector<int> y_cols(10);
+     y_cols[0] = 0; y_cols[1] = 1; y_cols[2] = 2; y_cols[3] = 3; y_cols[4] = 4; 
+	 y_cols[5] = 5; y_cols[6] = 6; y_cols[7] = 7; y_cols[8] = 8; y_cols[9] = 9; 
+	 
 //
      auto X_y_train = split_X_y(train, y_cols);
      auto X_train = X_y_train.first;
@@ -65,50 +72,31 @@ int main() {
      auto X_y_test = split_X_y(test, y_cols);
      auto X_test = X_y_test.first;
      auto y_test = X_y_test.second;
+	cout<<"X/y divided"<<endl;
 
 
     NeuralNetworkConfig conf;
-    conf.epochs = 800;
-    conf.lr = 0.005;
-    conf.threads = 10;
+    conf.epochs = 20;
+    conf.lr = 0.01;
+    conf.threads = 4;
+	conf.verbose = true;
     NeuralNetwork nn(conf);
 
-    nn.add(new DenseLayer(4, 6));
+    nn.add(new DenseLayer(X_train.cols(), 512));
     nn.add(new ActivationLayer("relu"));
-    nn.add(new DenseLayer(6, 6));
-    nn.add(new ActivationLayer("relu"));
-    nn.add(new DenseLayer(6, 3));
+    nn.add(new DenseLayer(512, 10));
     nn.add(new ActivationLayer("sigmoid"));
 
-
-    // Test saving/loading
-    nn.save_model("../resources/model.txt");
-    NeuralNetwork nn2;
-    nn2.load_model("../resources/model.txt");
-    nn2.save_model("../resources/model2.txt");
-
+	cout<<"Fitted"<<endl;
+	nn.save_model("../resources/mnist_model.txt");
+	cout<<"Saved"<<endl;
 
 //     Test fitting/predicting
-     nn.fit(X_train, y_train);
-     cout << "Train score: " << nn.accuracy_classification(X_train, y_train) << endl;
-     cout << "Test score: " << nn.accuracy_classification(X_test, y_test) << endl;
+    nn.fit(X_train, y_train);
+    cout << "Train score: " << nn.accuracy_classification(X_train, y_train) << endl;
+    cout << "Test score: " << nn.accuracy_classification(X_test, y_test) << endl;
+	cout<<"Predicted"<<endl;
 
-
-     cout << nn.predict(X_train.block(0, 0, 1, X_train.cols())) << endl;
-     cout << nn.predict_labled(X_train.block(0, 0, 1, X_train.cols()), key_map)[0] << endl;
 //
-//
-//
-     ifstream fin ("../resources/data.txt");
-     MatrixXd myX = read_matrix(fin);
-     MatrixXd myY = read_matrix(fin);
-     fin.close();
-     cout << "X = " << endl << myX << endl;
-     cout << "Y = " << endl << myY << endl;
-//
-     std::ofstream fout("../resources/result.txt");
-     save_matrix(fout, myY, 1);
-     fout.close();
-
 
 }
