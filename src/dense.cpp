@@ -18,6 +18,8 @@ DenseLayer::DenseLayer(int input_nodes, int output_nodes){
 	this->input_nodes = input_nodes;
 	this->output_nodes = output_nodes;
 	w = MatrixXd::Random(input_nodes ,output_nodes);
+	// w /= sqrt(this->input_nodes);
+
 	b = MatrixXd::Random(1 ,output_nodes);
 //	w = MatrixXd::Ones(input_nodes ,output_nodes);
 //	b = MatrixXd::Zero(1 ,output_nodes);
@@ -92,7 +94,6 @@ void DenseLayer::load_layer(std::ifstream &from){
 		from >> nrows >> ncols;
 		this->input_nodes = nrows;
 		this->output_nodes = ncols;
-		std::cout<<"Load layer"<<nrows<<" "<<ncols<<std::endl;
 		w = read_matrix(from, nrows, ncols);
 		b = read_matrix(from);	
 	}
