@@ -23,7 +23,7 @@ Eigen::MatrixXd mult_with_threads(const int n, const Eigen::MatrixXd &m1, const 
         threads[i] = thread(_mult, ref(blocks[i]), ref(m2), ref(results[i]), ref(mux));
     }
 
-    // merge blocks
+    // and the last one
     int from = (m1_height / n) * (n - 1);
     int to = m1_height - from;
     blocks[n - 1] = m1.block(from, 0, to, m1_width);
@@ -33,6 +33,7 @@ Eigen::MatrixXd mult_with_threads(const int n, const Eigen::MatrixXd &m1, const 
         threads[i].join();
     }
 
+    // merge blocks
     Eigen::MatrixXd res(m1.rows(), m2.cols());
     int block_h = results[0].rows();
     for (int j = 0; j < n; ++j) {
