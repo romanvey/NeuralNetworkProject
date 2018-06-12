@@ -56,12 +56,12 @@ int main() {
     cout << nn.predict(X_train.block(0, 0, 1, X_train.cols())) << endl;
     cout << nn.predict_labled(X_train.block(0, 0, 1, X_train.cols()), key_map)[0] << endl;
 	
-	MatrixXd to_predict(1, 4);
-	to_predict<<5 ,2.3, 3.4, 1;
-	cout << nn.predict_labled(to_predict, key_map)[0] << endl;
+    MatrixXd to_predict(1, 4);
+    to_predict<<5 ,2.3, 3.4, 1;
+    cout << nn.predict_labled(to_predict, key_map)[0] << endl;
 	 
 
-	nn.save_model("../resources/iris_model.txt");
+    nn.save_model("../resources/iris_model.txt");
 
 
 }
