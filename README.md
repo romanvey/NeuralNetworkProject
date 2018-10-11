@@ -1,7 +1,9 @@
 # Neural Networks library
 
 CMake version: 3.0
+
 Eigen version: 3.3
+
 C++ 14
 
 ## Install Eigen
@@ -9,16 +11,13 @@ download archive http://bitbucket.org/eigen/eigen/get/3.3.4.tar.bz2 and follow t
 
 ## Compile library
 ```
-
 mkdir cmake-build-release && cd cmake-build-release && cmake ../ && make && ./test
-
 ```
 
 ## Code examples
 ### Include header
 
-```{c++}
-
+```cpp
 #include "../src/neural_network.h"
 #include "../src/matrix_utils.h"
 #include "../src/neural_network_config.h"
@@ -27,12 +26,10 @@ mkdir cmake-build-release && cd cmake-build-release && cmake ../ && make && ./te
 #include <fstream>
 #include <iostream>
 #include <utility>
-
 ```
 
 ### Code example
-```{c++}
-
+```cpp
     // read .csv file
     auto A = csv2vector("../resources/iris_old.csv", ',');
     shuffle_vector(A);
@@ -93,18 +90,14 @@ mkdir cmake-build-release && cd cmake-build-release && cmake ../ && make && ./te
 
     // save the model
     nn.save_model("../resources/iris_model.txt");
-
-
 ```
 
 ### Load model 
-```{c++}
-
+```cpp
     MatrixXd to_predict(1, 4);
     to_predict<<5 ,2.3, 3.4, 1;
 
     NeuralNetwork nn2;
     nn2.load_model("../resources/iris_model.txt");
     cout<<nn2.predict(to_predict)<<endl;
-
 ```
