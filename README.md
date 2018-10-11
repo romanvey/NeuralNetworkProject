@@ -104,4 +104,5 @@ cout<<nn2.predict(to_predict)<<endl;
 
 ### Authors
 [Roman Vey](https://www.facebook.com/roman.vey)
+
 [Volodymyr Zabulskyi](https://www.facebook.com/zabulskyy)
